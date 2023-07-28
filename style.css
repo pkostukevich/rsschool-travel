@@ -8,14 +8,9 @@
   }
 
   body{
-    /* background: url(./assets/garrett-parker-DlkF4-dbCOU-unsplash.png) top left/100vw no-repeat,
-                      url(./assets/bcg2.png) top 2404px left 0px/100vw 100vh no-repeat; */
-    /* position: absolute;
     margin: 0px;
     display: grid;
-    grid-template-rows: 90px 3645px; */
-    margin: 0px;
-    display: grid;
+    overflow-x: hidden;
   }
 
   h1, h2, h3, h4, h5, h6{
@@ -45,7 +40,10 @@
   }
   .logo{
     filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
-    height: 40px;
+    line-height: 30px;
+  }
+  .logo_menu, .nav_mobile{
+    display: none;
   }
   nav{
     display: flex;
@@ -59,6 +57,11 @@
     color: white;
     font-family: 'Red Hat Text', sans-serif;
     font-weight: 500;
+  }
+
+  li a{
+    text-decoration: none;
+    color: #FFF;
   }
  
   .header{
@@ -76,11 +79,6 @@
     align-items: center;
     padding: 10px 30px;
     gap: 10px;
-    /* height: fit-content; */
-
-    /* position: absolute; 
-    margin-left: 1217px;
-    margin-top: -44px; */
     color: white;
     border: 0px;
 
@@ -91,6 +89,7 @@
     background: #0D606F;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), 0px 2px 3px rgba(13, 96, 111, 0.16);
     border-radius: 10px;
+    cursor: pointer;
   }
 
   section{
@@ -98,6 +97,7 @@
     /* max-width: 1200px; */
     margin: 0 auto;
     width: 100%;
+    overflow-x: hidden;
   }
 
   #main-inf{
@@ -223,6 +223,7 @@ justify-content: space-between;
 vertical-align: middle;
 text-align: center;
 margin: 0;
+padding: 0;
 
 font-family: 'Aleo';
 font-style: normal;
@@ -273,21 +274,44 @@ font-size: 20px;
 line-height: 24px;
 
 color: #0D606F;
+margin-bottom: 0;
 }
 
 .destination_photo-wrapper{
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
-  overflow: hidden;
   gap: 60px;
   max-width: 100vw;
-  margin-bottom: 24px;
+  margin-bottom: 50px;
   justify-content: center;
+  transition: all .5s;
 }
 
-.destination_photo-wrapper img{
+.destination_photo-wrapper.dragging{
+  cursor: grab;
+  user-select: none;
+}
+
+.destination_photo{
   border-radius: 16px;
+  cursor: pointer;
+
+}
+
+/* .destination_arrows{
+  display: none;
+} */
+
+.destination_name{
+  margin-top: -70px; 
+  margin-left: 15px;
+  color: #FFF;
+font-family: 'Red Hat Text';
+font-size: 32px;
+font-style: normal;
+font-weight: 500;
+line-height: normal;
 }
 
 .destination_points{
@@ -295,6 +319,17 @@ color: #0D606F;
   justify-content: center;
   margin-bottom: 40px;
   gap: 10px;
+}
+
+.point{
+  fill-opacity: 0.5;
+  transition-duration: .1s;
+  transition-delay: 0ms;
+  cursor: pointer;
+}
+
+.point.active{
+  fill-opacity: 1;
 }
 
 .stories{
@@ -315,6 +350,16 @@ color: #0D606F;
   flex-direction: row;
   gap: 40px;
   margin-bottom: 30px;
+}
+
+.story_text a{
+  color: #0D606F;
+font-family: Aleo;
+font-size: 20px;
+font-style: normal;
+font-weight: 700;
+line-height: normal;
+text-decoration-line: underline;
 }
 
 footer{
@@ -344,3 +389,434 @@ gap: 20px;
 list-style: none;
 margin: 0;
 } 
+
+.popup-wrapper{
+  position: absolute;
+  background-color: rgba(1, 5, 6, 0.7);
+  height: 100vh;
+  width: 100vw;
+  vertical-align: middle;
+  display: flex;
+}
+
+.popup{
+  width: 650px;
+  margin: auto;
+  vertical-align: middle;
+  border-radius: 16px;
+  padding: 25px 45px;
+  background: linear-gradient(180deg, #FFF 0%, #0D606F 180%);
+box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+z-index: 5;
+}
+
+.popup .rectangle{
+  width: 100%;
+  height: 54px;
+  border: none;
+  border-radius: 10px;
+  box-shadow: 0px 2px 3px 0px rgba(13, 96, 111, 0.16) inset, 0px 0px 3px 0px rgba(13, 96, 111, 0.08) inset;
+}
+
+.popup-header{
+  color: #0D606F;
+  font-family: 'Aleo';
+  font-size: 32px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.popup_signin-social{
+  font-family: 'Red Hat Text';
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  text-align: center;
+}
+
+.popup_signin_btn{
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  align-items: center;
+  margin-bottom: 20px;
+  cursor: pointer;
+}
+
+.popup_signin-facebook{
+  color:#FFF;
+  background-color: #1877F2;
+}
+
+.popup_signin-google{
+  color: #0D606F;
+  background-color: #FFFFFF;
+}
+
+.popup_divider{ 
+  width: 100%;
+  color: rgba(13, 96, 111, 0.50);
+font-family: 'Aleo';
+font-size: 20px;
+font-style: normal;
+font-weight: 700;
+line-height: normal;
+}
+
+.popup_input-wrapper{
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin-bottom: 20px;
+}
+
+.popup_input-header{
+  color: #0D606F;
+font-family: 'Aleo';
+font-size: 16px;
+font-style: normal;
+font-weight: 400;
+line-height: normal;
+}
+
+.popup_btn{
+  margin: 5px auto 25px;
+  border: none;
+  color: #FFF;
+font-family: 'Red Hat Text';
+font-size: 20px;
+font-style: normal;
+font-weight: 400;
+line-height: normal;
+text-align: center;
+background: #0D606F;
+}
+
+.popup_note{
+  color: rgba(13, 96, 111, 0.50);
+text-shadow: 0px 2px 3px 0px rgba(255, 255, 255, 0.16);
+font-family: Aleo;
+font-size: 15px;
+font-style: normal;
+font-weight: 700;
+line-height: normal;
+border-top: solid 1px rgba(13, 96, 111, 0.50);
+width: 100%;
+text-align: center;
+padding-top: 20px;
+}
+
+.popup a{
+  text-decoration: underline;
+  color: #0D606F;
+}
+
+.popup_forgot{
+  text-shadow: 0px 2px 3px 0px rgba(255, 255, 255, 0.16);
+  font-family: Aleo;
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  margin: auto;
+  display: block;
+  width: 100%;
+  margin-bottom: 25px;
+  text-align: center;
+}
+
+.popup_bcg{
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  z-index: 4;
+}
+
+
+@media screen and (max-width: 395px) {
+  .header{
+    height: 251px;
+  }
+  .header_top{
+    height: 251px;
+    width: 100%;
+    background: linear-gradient(180deg, #0D606F 0%, rgba(13, 96, 111, 0.00) 30%);
+    box-shadow: none;
+    position: absolute;
+  }
+
+  .container{
+    max-width: 320px;
+    width: 100%;
+  }
+
+  nav, .login, .logo_text, h1, #intro{
+    display: none;
+  }
+
+  .container{
+    margin: 0 auto;
+  }
+
+  .logo{
+    margin-top: 43px;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    width: 100%;
+  }
+
+  .logo_menu{
+    display: inline-flex;
+  }
+
+  .nav_mobile{
+    position: absolute;
+    right: 0;
+    padding: 44px 15px 30px 44px;
+    display: block;
+    border-radius: 10px;
+    background: #F2785C;
+    box-shadow: 0px 4px 3px 0px rgba(13, 96, 111, 0.25);
+  }
+
+  .nav_mobile ul{
+    color: #FFF;
+    font-family: 'Red Hat Text';
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    list-style: none;
+    padding: 0;
+  }
+
+  .nav_mobile li{
+    margin: 5px 0;
+  }
+
+  .close_btn{
+    position: absolute;
+    top: 8px;
+    left: 8px;
+  }
+
+  #search-wrapper{
+    width: 100%;
+    height: 48px;
+    margin-top: 124px;
+    padding: 10px;
+  }
+
+  #search{
+    font-size: 14px;
+    width: 60%;
+  }
+
+  .blue_btn{
+    font-size: 11px;
+    padding: 10px 10px;
+  }
+
+  .headline{
+    font-size: 14px;
+    margin: 20px auto;
+    height: 20px;
+    line-height: normal;
+  }
+
+  #steps{
+    font-size: 10px;
+    line-height: normal;
+    justify-content: space-around;
+    height: auto;
+    margin-bottom: 0;
+  }
+
+  .ic{
+    height: 70px;
+    width: 70px;
+  }
+
+  #steps li{
+    width: 30%;
+  }
+
+  #st{
+    text-align: left;
+  }
+
+  #st1{
+    text-align: center;
+  }
+
+  #st2{
+    text-align: right;
+  }
+
+  .destination_photo-wrapper{
+    margin-bottom: 140px;
+  }
+
+  .destination_photo{
+    height: 210px;
+    width: 320px;
+    object-fit: cover;
+  }
+
+  .destination_name{
+    font-size: 20px;
+    margin-top: -200px;
+  }
+
+  .destination_points{
+    z-index: 5;
+    position: relative;
+    margin-bottom: 30px;
+  }
+
+  .destination_points svg{
+    width: 16px;
+    height: 16px;
+  }
+
+  .destination_points circle{
+    cx: 8px;
+    cy: 8px;
+    r: 8px;
+  }
+
+  .blue_btn svg{
+    width: 10px;
+    height: 15px;
+  }
+
+  #storiesH{
+    margin-bottom: 10px;
+  }
+
+  .single_story {
+    gap: 10px;
+    height: 130px;
+    margin-bottom: 15px;
+  }
+
+  .single_story img{
+    width: 155px;
+    height: 130px;
+    object-fit: cover;
+    border-radius: 16px;
+  }
+
+  h3{
+    font-size: 11px;
+    line-height: normal;
+    height: 15px;
+    font-weight: 700;
+    width: auto;
+    margin: 3px 0 17px 0;
+  }
+
+  .descr{
+    font-size: 9px;
+    line-height: normal;
+    text-overflow: ellipsis;
+    width: auto;
+    height: 55px;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 5;
+    -webkit-box-orient: vertical;
+  }
+
+  .bg_blur{
+    padding: 10px 0;
+  }
+
+  .story_text{
+    width: calc(100% - 165px);
+  }
+
+  .story_text a{
+    font-size: 9px;
+  }
+
+  footer{
+    padding: 10px auto;
+  }
+
+  footer div{
+    display: none;
+  }
+
+  .social{
+    justify-content: center;
+  }
+  /* .destination_arrows{
+    display: flex;
+    width: 100%;
+    gap: 250px;
+    margin: 0 auto;
+    justify-content: center;
+    position: absolute;
+    margin-top: 90px;
+  } */
+
+  .popup {
+    padding: 15px 10px;
+    width: 250px;
+  }
+
+  .popup-header{
+    font-size: 14px;
+    margin-bottom: 8px;
+  }
+
+  .popup_input-header{
+    font-size: 9px;
+  }
+
+  .popup_input-wrapper{
+    margin-bottom: 8px;
+  }
+
+  .popup .rectangle{
+    height: 25px;
+    border-radius: 5px;
+    margin-bottom: 8px;
+  }
+
+  .popup_btn{
+    font-size: 12px;
+  }
+
+  .popup_note, .popup_divider, .popup_forgot{
+    font-size: 9px;
+  }
+
+  .popup_signin_btn {
+    font-size: 9px;
+    gap: 5px;
+  }
+
+  .popup_signin-social svg{
+    height: 12px;
+    width: 13px;
+  }
+
+  .login_close_btn{
+    position: absolute;
+  }
+
+  .login_close_btn path{
+    fill:#0D606F;
+  }
+}
+
+.hidden{
+  display: none !important;
+}
